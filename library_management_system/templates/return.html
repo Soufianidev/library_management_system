@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Book</title>
+</head>
+<body>
+    <h2>Return a Book</h2>
+    <form method="POST">
+        <label for="member_id">Select Member:</label>
+        <select name="member_id" required>
+            {% for member in members %}
+            <option value="{{ member['member_id'] }}">{{ member['name'] }} (ID: {{ member['member_id'] }})</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="book_isbn">Select Book to Return:</label>
+        <select name="book_isbn" required>
+            {% for member in members %}
+            {% for book in member['borrowed_books'] %}
+            <option value="{{ book['isbn'] }}">{{ book['title'] }} by {{ book['author'] }}</option>
+            {% endfor %}
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Return Book</button>
+    </form>
+</body>
+</html>

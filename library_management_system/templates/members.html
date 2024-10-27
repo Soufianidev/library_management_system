@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Members</title>
+</head>
+<body>
+    <h2>Library Members</h2>
+    <ul>
+        {% for member in members %}
+        <li>{{ member['name'] }} (ID: {{ member['member_id'] }})</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Register a New Member</h3>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="member_id" placeholder="Member ID" required>
+        <button type="submit">Register Member</button>
+    </form>
+</body>
+</html>

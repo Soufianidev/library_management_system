@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+    <h2>Books in Library</h2>
+
+    <!-- Book Availability Filter -->
+    <form method="GET" action="{{ url_for('books') }}">
+        <label for="available">Show:</label>
+        <select name="available" onchange="this.form.submit()">
+            <option value="all" {% if show_available == "all" %}selected{% endif %}>All Books</option>
+            <option value="available" {% if show_available == "available" %}selected{% endif %}>Available Only</option>
+        </select>
+    </form>
+
+    <!-- Book Search -->
+    <form method="GET" action="{{ url_for('search_books') }}">
+        <input type="text" name="query" placeholder="Search by title, author, ISBN" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        {% for book in books %}
+        <li>{{ book['title'] }} by {{ book['author'] }} - Available: {{ 'Yes' if book['available'] else 'No' }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add a New Book</h3>
+    <form method="POST">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="author" placeholder="Author" required>
+        <input type="text" name="publication_year" placeholder="Publication Year" required>
+        <input type="text" name="isbn" placeholder="ISBN" required>
+        <button type="submit">Add Book</button>
+    </form>
+</body>
+</html>
